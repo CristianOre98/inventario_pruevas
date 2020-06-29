@@ -137,11 +137,11 @@ public class Productos extends HttpServlet {
          int id_producto = Integer.parseInt(request.getParameter("txtId_producto"));
             String nom_producto = request.getParameter("txtNombreProducto");
             String des_producto = request.getParameter("txtDescripcionProducto");
-            float stock = Float.parseFloat(request.getParameter("txtStockProducto").replaceAll("\\s*$",""));
-            float precio = Float.parseFloat(request.getParameter("txtPrecioProducto").replaceAll("\\s*$",""));
+            float stock = Float.parseFloat(request.getParameter("txtStockProducto").trim());
+            float precio = Float.parseFloat(request.getParameter("txtPrecioProducto").trim());
             String unidad_de_medida = request.getParameter("txtUnidadProducto");
-            int estado_producto = Integer.parseInt(request.getParameter("txtEstadoProducto").replaceAll("\\s*$",""));
-            int catego = Integer.parseInt(request.getParameter("txtCategoriaProducto").replaceAll("\\s*$",""));
+            int estado_producto = Integer.parseInt(request.getParameter("txtEstadoProducto").trim());
+            int categoria_id = Integer.parseInt(request.getParameter("txtCategoriaProducto").trim());
             String fecha_entrada = request.getParameter("txtFechaProducto");
         
         producto.setId_producto(id_producto);
@@ -152,10 +152,10 @@ public class Productos extends HttpServlet {
         producto.setUnidadMedida(unidad_de_medida);
         producto.setEstado(estado_producto);
         producto.setFecha_entrada(fecha_entrada);
-        producto.setCategoria_id(catego);
+        producto.setCategoria_id(categoria_id);
         
         ProductoDAO guardarProducto = new ProductoDAOImplementar();
-        guardarProducto.guardarProduc(producto);
+        guardarProducto.guardarPro(producto);
         
         this.listaProducto(request, response);
     }

@@ -92,7 +92,7 @@ public class ProductoDAOImplementar implements ProductoDAO{
         
         return producto;
     }
-/*
+
     @Override
     public boolean guardarPro(Producto producto) {
         this.conn = FactoryConexionBD.open(FactoryConexionBD.MySQL);
@@ -100,15 +100,9 @@ public class ProductoDAOImplementar implements ProductoDAO{
         
         try{
             if(producto.getId_producto() == 0){
-              //  StringBuilder miSQL = new StringBuilder();
-                
-               
-                    
-               //int valor = registrarProducto.executeUpdate();
-      
-              
+               StringBuilder miSQL = new StringBuilder();
 
-/*
+
                 //Agregar consulta SQL; el id_categoria es autoincrementable.
                 miSQL.append("INSERT INTO tb_producto(nom_producto, des_producto, stock, precio, unidad_de_medida, estado_producto, categoria) VALUES ");
                 miSQL.append("('"+producto.getNom_producto()+ "', ");
@@ -121,7 +115,7 @@ public class ProductoDAOImplementar implements ProductoDAO{
                 miSQL.append("' "+producto.getFecha_entrada()+"');");
                 //Invocar método para ejecutar la consulta.
         
-                this.conn.ejecutarSQL(registrarProducto.toString());
+                this.conn.ejecutarSQL(miSQL.toString());
                 System.out.println("Registro Guardado...");
             }else if(producto.getId_producto() >0){                            //Comprobación para actualizar...
                 System.out.println("Entramos...");
@@ -147,7 +141,7 @@ public class ProductoDAOImplementar implements ProductoDAO{
         }
         return guardar;
     }
-*/
+
     @Override
     public boolean borrarPro(int id_pro_borrar) {
          this.conn = FactoryConexionBD.open(FactoryConexionBD.MySQL);
@@ -164,7 +158,7 @@ public class ProductoDAOImplementar implements ProductoDAO{
         }
         return borrar;
     }
-
+/*
     @Override
     public boolean guardarProduc(Producto producto) {
          boolean guardar = false;
@@ -200,18 +194,6 @@ public class ProductoDAOImplementar implements ProductoDAO{
         return guardar;
        
     }
-
-    @Override
-    public boolean guardarPro(Producto producto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
-
+    */
    
-
-   
-    
-   
-    
 }
