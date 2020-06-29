@@ -155,7 +155,7 @@ public class Productos extends HttpServlet {
         producto.setCategoria_id(catego);
         
         ProductoDAO guardarProducto = new ProductoDAOImplementar();
-        guardarProducto.guardarProduc(producto);
+        guardarProducto.guardarPro(producto);
         
         this.listaProducto(request, response);
     }
