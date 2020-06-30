@@ -104,7 +104,7 @@ public class ProductoDAOImplementar implements ProductoDAO{
 
 
                 //Agregar consulta SQL; el id_categoria es autoincrementable.
-                miSQL.append("INSERT INTO tb_producto(nom_producto, des_producto, stock, precio, unidad_de_medida, estado_producto, categoria) VALUES ");
+                miSQL.append("INSERT INTO tb_producto(nom_producto, des_producto, stock, precio, unidad_de_medida, estado_producto, categoria, fecha_registro) VALUES ");
                 miSQL.append("('"+producto.getNom_producto()+ "', ");
                 miSQL.append("'"+producto.getDes_producto()+"',");
                 miSQL.append(producto.getStock()+", ");
