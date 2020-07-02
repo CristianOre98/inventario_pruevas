@@ -17,13 +17,21 @@ public class Producto {
     
     
     // El formato de fecha se aplica a la fecha actu
+    
+    public static String fecha() {
+            Date f = new Date();
+            
+            SimpleDateFormat formatofecha = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
+            
+        return formatofecha.format(f);
+    }
   
         
     public Producto() {
        
-        
+        this.fecha_entrada = fecha();
         this.id_producto = 0;
-        this.categoria_id = getCategoria_id();
+        this.categoria_id= categoria_id;
         this.unidadMedida = "";
         this.nom_producto = "";
         this.estado = 1;
@@ -124,7 +132,7 @@ public class Producto {
         this.categoria_id = categoria_id;
     }
 
-   
+  
     
     
      

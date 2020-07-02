@@ -106,13 +106,13 @@ public class ProductoDAOImplementar implements ProductoDAO{
                 //Agregar consulta SQL; el id_categoria es autoincrementable.
                 miSQL.append("INSERT INTO tb_producto(nom_producto, des_producto, stock, precio, unidad_de_medida, estado_producto, categoria, fecha_entrada) VALUES ");
                 miSQL.append("('"+producto.getNom_producto()+ "', ");
-                miSQL.append("'"+producto.getDes_producto()+"',");
+                miSQL.append("'"+producto.getDes_producto()+"', ");
                 miSQL.append(producto.getStock()+", ");
-                miSQL.append(producto.getPrecio()+", ");
-                miSQL.append("', "+producto.getUnidadMedida()+"', ");
-                miSQL.append(producto.getCategoria_id()+", ");
+                miSQL.append(producto.getPrecio()+", '");
+                miSQL.append(producto.getUnidadMedida()+"', ");
                 miSQL.append(producto.getEstado()+", ");
-                miSQL.append("' "+producto.getFecha_entrada()+"');");
+                miSQL.append(producto.getCategoria_id()+", ");
+                miSQL.append("'"+producto.getFecha_entrada()+"');");
                 //Invocar método para ejecutar la consulta.
         
                 this.conn.ejecutarSQL(miSQL.toString());
@@ -159,42 +159,6 @@ public class ProductoDAOImplementar implements ProductoDAO{
         }
         return borrar;
     }
-/*
-    @Override
-    public boolean guardarProduc(Producto producto) {
-         boolean guardar = false;
-       try{
-        if(producto.getId_producto() == 0){
-            
-        Connection miConexcion = DriverManager.getConnection("jdbc:mysql://localhost:3306/bd_inventario?zeroDateTimeBehavior=convertToNull", "root", "");
-        
-                
-                    String sSQL=
-            "INSERT INTO tb_producto"
-            + "(nom_producto, des_producto, stock, precio, unidad_de_medida, estado_producto, categoria, fecha_entrada)" 
-            + " VALUES (?,?,?,?,?,?,?,?);";
 
-           PreparedStatement preparedStatement = (PreparedStatement) miConexcion.prepareStatement(sSQL);
-            
-            preparedStatement.setString(1, producto.getNom_producto());
-            preparedStatement.setString(2, producto.getDes_producto());
-            preparedStatement.setFloat(3, producto.getStock());
-            preparedStatement.setFloat(4, producto.getPrecio());
-            preparedStatement.setString(5, producto.getUnidadMedida());
-            preparedStatement.setInt(6, producto.getEstado());
-            preparedStatement.setInt(7, producto.getCategoria_id());
-            preparedStatement.setString(8, producto.getFecha_entrada());
-             
-           preparedStatement.executeUpdate();
-        }
-           } catch (SQLException ex) {
-            Logger.getLogger(ProductoDAOImplementar.class.getName()).log(Level.SEVERE, null, ex);
-            
-        }
-       
-        return guardar;
-       
-    }
-    */
    
 }

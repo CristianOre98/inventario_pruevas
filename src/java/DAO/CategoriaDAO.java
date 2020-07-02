@@ -1,6 +1,7 @@
 package DAO;
 
 import Model.Categoria;
+import java.sql.ResultSet;
 import java.util.List;
 
 public interface CategoriaDAO {
@@ -12,6 +13,6 @@ public interface CategoriaDAO {
     public boolean guardarCat(Categoria categoria);
     public boolean borrarCat(int id_cat_borrar);
     
-    
-     //Autor: Prof. Manuel de Jesús Gámez López
+    public ResultSet mostrarCategoria();
+     
 }

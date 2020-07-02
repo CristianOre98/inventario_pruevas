@@ -1,13 +1,9 @@
 
 package Controller;
 
-import DAO.CategoriaDAO;
-import DAO.CategoriaDAOImplementar;
-import DAO.ProductoDAO;
-import DAO.ProductoDAOImplementar;
-import Model.Categoria;
-import Model.Producto;
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
+import DAO.UsuarioDAO;
+import DAO.UsuarioDaoImplementar;
+import Model.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -18,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-public class Productos extends HttpServlet {
+public class Usuarios extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,16 +31,16 @@ public class Productos extends HttpServlet {
         
     }
     //Agregar metodo listaCategorias
-    protected void listaProducto(HttpServletRequest request, HttpServletResponse response)
+    protected void listaUsuario(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException{
         response.setContentType("text/html;charset=UTF-8");
         
         //Instancia a categoria DAO
-        ProductoDAO producto = new ProductoDAOImplementar();  
+        UsuarioDAO usuario = new UsuarioDaoImplementar();  
         //crear instacia de session; true para iniciar session
         HttpSession sesion = request.getSession(true);
-        sesion.setAttribute("lista", producto.listar());
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Vistas-Producto/listarProducto.jsp");
+        sesion.setAttribute("lista", usuario.listar());
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Vistas-Usuario/listarUsuario.jsp");
         dispatcher.forward(request, response);
         
     }
@@ -64,35 +60,37 @@ public class Productos extends HttpServlet {
         processRequest(request, response);
         String parametro = request.getParameter("opcion");
         if(parametro.equals("crear")){
-            String pagina = "/Vistas-Producto/crearProducto.jsp";
+            String pagina = "/Vistas-Usuario/crearUsuario.jsp";
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
             dispatcher.forward(request, response);
 
         }else if(parametro.equals("listar")){
-            this.listaProducto(request, response);
+            this.listaUsuario(request, response);
         }else if(parametro.equals("editar")){
             //Se efectua el casting o conversión de datos porque lo ingresado en el formulario es texto.
             
-            int id_producto = Integer.parseInt(request.getParameter("id_pro").replaceAll("\\s*$",""));
+            int id = Integer.parseInt(request.getParameter("id_usu").replaceAll("\\s*$",""));
             
-            String nom_producto = request.getParameter("nom_pro");
-            String des_producto = request.getParameter("des_pro");
-            int estado_producto = Integer.parseInt(request.getParameter("estado_pro").replaceAll("\\s*$",""));
+            String nombre = request.getParameter("nom_usu");
+            String apellido = request.getParameter("apellido_usu");
+            String correo = request.getParameter("correo_usu");
+            String usuario = request.getParameter("usuario_usu");
+            String clave = request.getParameter("clave_usu");
             
-            float stock = Float.parseFloat(request.getParameter("stock_pro").replaceAll("\\s*$",""));
-            float precio = Float.parseFloat(request.getParameter("precio_pro").replaceAll("\\s*$",""));
-            
-            String unidad_de_medida = request.getParameter("unidad_pro");
-            int categoria_id = Integer.parseInt(request.getParameter("categoria_pro").replaceAll("\\s*$",""));
+            int tipo = Integer.parseInt(request.getParameter("tipo_usu").replaceAll("\\s*$",""));
+            int estado = Integer.parseInt(request.getParameter("estado_usu").replaceAll("\\s*$",""));
+            String pregunta = request.getParameter("pregunta_usu");
+            String respuesta = request.getParameter("respuesta_usu");
+           
      
-         String fecha_entrada = request.getParameter("fecha_pro");
+         
 	
     	
         	
-                String pagina = "/Vistas-Producto/crearProducto.jsp?id_p="+id_producto+"&&nom_p="
-                    +nom_producto+"&&estado_p="+estado_producto+"&&des_p="+des_producto+"&&stock_p="+stock+
-                    "&&precio_p="+precio+"&&unidad_p="+unidad_de_medida+"&&categoria_p="+categoria_id+
-                    "&&fecha_p="+fecha_entrada+"&&senal=1";
+                String pagina = "/Vistas-Usuario/crearUsuario.jsp?id_u="+id+"&&nombre_u="
+                    +nombre+"&&apellido_u="+apellido+"&&correo_u="+correo+"&&usuario_u="+usuario+
+                    "&&clave_u="+clave+"&&tipo_u="+tipo+"&&estado_u="+estado+
+                    "&&pregunta_u="+pregunta+"&&respuesta_u="+respuesta+"&&senal=1";
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
             dispatcher.forward(request, response);
     	
@@ -102,10 +100,10 @@ public class Productos extends HttpServlet {
             
             
         }else if(parametro.equals("eliminar")){
-            int Producto_id = Integer.parseInt(request.getParameter("id"));
-            ProductoDAO producto = new ProductoDAOImplementar();
-            producto.borrarPro(Producto_id);    
-            this.listaProducto(request, response);
+            int Usuario_id = Integer.parseInt(request.getParameter("id").trim());
+            UsuarioDAO usuario = new UsuarioDaoImplementar();
+            usuario.borrarUsu(Usuario_id);    
+            this.listaUsuario(request, response);
         }
     }
 
@@ -125,34 +123,38 @@ public class Productos extends HttpServlet {
         
             
                 
-             Producto producto = new Producto();
+             Usuario usuario = new Usuario();
              
         //Se efectua el casting o conversión de datos porque lo ingresado en el formulario es texto.
         
-         int id_producto = Integer.parseInt(request.getParameter("txtId_producto"));
-            String nom_producto = request.getParameter("txtNombreProducto");
-            String des_producto = request.getParameter("txtDescripcionProducto");
-            float stock = Float.parseFloat(request.getParameter("txtStockProducto"));
-            float precio = Float.parseFloat(request.getParameter("txtPrecioProducto"));
-            String unidad_de_medida = request.getParameter("txtUnidadProducto");
-            int estado_producto = Integer.parseInt(request.getParameter("txtEstadoProducto"));
-            int categoria_id = Integer.parseInt(request.getParameter("txtCategoriaProducto"));
-            String fecha_entrada = request.getParameter("txtFechaProducto");
+         int id = Integer.parseInt(request.getParameter("txtId").trim());
+            String nombre = request.getParameter("txtNombreUsuario");
+            String apellido = request.getParameter("txtApellidoUsuario");
+            String correo = request.getParameter("txtCorreoUsuario");
+            String usuari = request.getParameter("txtUsuario");
+           
+            String clave = request.getParameter("txtClaveUsuario");
+            int tipo = Integer.parseInt(request.getParameter("txtTipoUsuario").trim());
+            int estado = Integer.parseInt(request.getParameter("txtEstadoUsuario").trim());
+            String preguntas = request.getParameter("txtPreguntaUsuario");
+            String respuesta = request.getParameter("txtRespuestaUsuario");
         
-        producto.setId_producto(id_producto);
-        producto.setNom_producto(nom_producto);
-        producto.setDes_producto(des_producto);
-        producto.setPrecio(precio);
-        producto.setStock(stock);
-        producto.setUnidadMedida(unidad_de_medida);
-        producto.setEstado(estado_producto);
-        producto.setFecha_entrada(fecha_entrada);
-        producto.setCategoria_id(categoria_id);
+                usuario.setId(id);
+                usuario.setNombre(nombre);
+                usuario.setApellido(apellido);
+                usuario.setCorreo(correo);
+                usuario.setUsuario(usuari);
+                usuario.setClave(clave);
+                usuario.setTipo(tipo);
+                usuario.setEstado(estado);
+                usuario.setPregunta(preguntas);
+                usuario.setRespuesta(respuesta);
         
-        ProductoDAO guardarProducto = new ProductoDAOImplementar();
-        guardarProducto.guardarPro(producto);
         
-        this.listaProducto(request, response);
+        UsuarioDAO guardarUsuario = new UsuarioDaoImplementar();
+        guardarUsuario.guardarUsu(usuario);
+        
+        this.listaUsuario(request, response);
     }
 
     /**

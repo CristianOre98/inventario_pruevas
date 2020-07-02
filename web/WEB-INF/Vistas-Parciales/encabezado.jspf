@@ -31,12 +31,13 @@
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Menu</div>
                             <a class="nav-link" href="categorias?opcion=listar">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Categoria
                             </a>
                             <a class="nav-link" href="productos?opcion=listar">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Producto
+                            </a>
+                             <a class="nav-link" href="usuarios?opcion=listar">
+                                Usuario
                             </a>
                             
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">

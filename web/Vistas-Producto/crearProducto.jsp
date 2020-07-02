@@ -1,6 +1,15 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="Model.Producto"%>
+<%@page import="Model.Categoria"%>
+<%@page import="Factory.ConexionBD"%>
+<%@page import="Factory.FactoryConexionBD"%>
+<%@page import="DAO.ProductoDAOImplementar"%>
+<jsp:useBean id="cn" class="DAO.CategoriaDAOImplementar" scope="page"></jsp:useBean>
+    <jsp:useBean id="producto" scope="session" class="Model.Producto" />
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
-<jsp:useBean id="producto" scope="session" class="Model.Producto" />
+
 
 <%
 
@@ -36,7 +45,7 @@
         unidad_pro = producto.getUnidadMedida();
         estado_pro = String.valueOf(producto.getEstado());
         categoria_pro = String.valueOf(producto.getCategoria_id());
-        fecha_pro = producto.getFecha_entrada();
+        
     }
 %>
 
@@ -93,8 +102,20 @@
             <div class="form-row">
              <div class="col-md-6">
              <div class="form-group">
+                 
             <label class="small mb-1" >CATEGORIA</label>
-            <input class="form-control py-4"  type="text" name="txtCategoriaProducto" value="<%= categoria_pro %>" required />
+        <select class="form-control" name="txtCategoriaProducto" required>
+               
+            
+            <%
+            ResultSet rs = cn.mostrarCategoria();
+                    while(rs.next()){   
+                %>
+                <option value="<%=rs.getString("id_categoria")%>"><%=rs.getString("nom_categoria")%></option>
+           <%
+                    }       
+           %>
+    </select>
            </div>
               </div>
              <div class="col-md-6">
@@ -115,7 +136,11 @@
              <div class="col-md-6">
              <div class="form-group">
            <label class="small mb-1" >FECHA</label>
-            <input class="form-control py-4" type="text" name="txtFechaProducto" value="<%= fecha_pro %>" required />
+           <%
+           Producto p = new Producto();
+           fecha_pro = p.fecha();
+           %>
+           <input class="form-control py-4" type="text" name="txtFechaProducto" value="<%= fecha_pro %>" readonly />
             </div>
             </div>
             </div>

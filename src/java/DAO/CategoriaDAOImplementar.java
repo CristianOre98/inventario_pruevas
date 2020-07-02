@@ -124,6 +124,22 @@ public class CategoriaDAOImplementar implements CategoriaDAO{
         return borrar;
     }
     
-    //Autor: Prof. Manuel de Jesús Gámez López
+     @Override
+   public ResultSet mostrarCategoria(){
+        
+        this.conn = FactoryConexionBD.open(FactoryConexionBD.MySQL);
+        //Bandera de resultados
+       
+            StringBuilder miSQL = new StringBuilder();
+            miSQL.append("SELECT id_categoria, nom_categoria FROM tb_categoria");
+           
+            
+            
+        ResultSet ResultSet = this.conn.consultaSQL(miSQL.toString());
+        
+        return ResultSet;
+        
+        
+   }
     
 }
