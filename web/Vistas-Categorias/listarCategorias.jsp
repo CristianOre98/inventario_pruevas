@@ -1,6 +1,6 @@
 <%@page import="Model.Categoria"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% /*
+<% 
    try{
        
         HttpSession var_Session = request.getSession(false);
@@ -11,7 +11,7 @@
         if(user == null){
             response.sendRedirect("./");
         }else if(user!=null){
-               */
+               
 %>
 <!DOCTYPE html>
 <!-- El id debe ser el mismo que se le colocó de nombre a la sesión en el controlador -->
@@ -35,7 +35,7 @@
             <br>
             <!--<a href="#" class="btn btn-success btn-sm glyphicon glyphicon-pencil" role="button">Nueva categoria</a>-->
             <a href="<%= request.getContextPath() %>/categorias?opcion=crear" class="btn btn-success btn-sm glyphicon glyphicon-pencil" role="button">Nueva categoria</a>
-            <h3>Listado de Categorias Registradas</h3>  <a class="btn btn-warning float-right" href="pdf">PDF</a>
+            <h3>Listado de Categorias Registradas</h3>  <a class="btn btn-warning float-right" href="pdf">Reporte de Categoria</a>
            
          <table id="tablaClientes" class="table-responsive text-center table-striped table-bordered" style="width:100%">
              <thead class="table-dark">
@@ -47,7 +47,7 @@
                             <th style="text-align: center;">ACCION</th>
                         </tr>
                     </thead>
-                    <tfoot>
+                    <tfoot class="table-dark">
                         <tr>
                             <th style="text-align: center;">|N°|</th>
                             <th style="text-align: center;">ID</th>
@@ -74,9 +74,7 @@
                         <td style="text-align: center;">
                             <!-- /Vistas-Categorias/crearCategoria.jsp -->
                             <a href="<%= request.getContextPath() %>/categorias?opcion=modificar&&id_cat=<%= categoria.getId_categoria() %>&&nombre_cat=<%= categoria.getNom_categoria() %>&&estado_cat=<%= categoria.getEstado_categoria() %>" class="btn btn-info btn-sm glyphicon glyphicon-edit" role="button" name="btnmodi">Editar</a>
-                            <a href="javascript:void(0)" title="Borrar Registro" id="delete_categoria"
-                               data-opcion="eliminar" data-id_categoria="<%= categoria.getId_categoria() %>" data-nom_categoria="<%= categoria.getNom_categoria() %>" 
-                               data-est_categoria="<%= categoria.getEstado_categoria() %>" class="btn btn-danger btn-sm glyphicon glyphicon-remove" role="button">Eliminar</a>
+                            <a href="<%= request.getContextPath() %>/categorias?opcion=eliminar&&id=<%= categoria.getId_categoria() %> class="btn btn-danger btn-sm glyphicon glyphicon-remove" role="button">Eliminar</a>
                         </td>
                     </tr>
                     <%
@@ -99,15 +97,14 @@
         $('#tablaClientes').DataTable();
     });
 </script>
-  <%  /*
+  
+    </body>
+</html>
+
+<%
             }
                //Aca puede ir un mensaje para informar que no se ha iniciado sesión.
             }catch(Exception e){
 
             }
-      */
-%>
-    </body>
-</html>
-
-
+   %>

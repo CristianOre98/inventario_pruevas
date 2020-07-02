@@ -3,8 +3,11 @@ package Controller;
 import DAO.CategoriaDAO;
 import DAO.CategoriaDAOImplementar;
 import Model.Categoria;
+import Model.ResultadoJson;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -80,11 +83,17 @@ public class Categorias extends HttpServlet {
         }else if(parametro.equals("eliminar")){
             int del_id = Integer.parseInt(request.getParameter("id"));
             CategoriaDAO categoria = new CategoriaDAOImplementar();
+            
             categoria.borrarCat(del_id);    
             this.listaCategorias(request, response);
-        }
-    }
             
+            
+            
+            
+            }
+    }
+        
+                
 
     
     @Override

@@ -1,5 +1,21 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+           try{
+        HttpSession var_Session = request.getSession(false);
+        String nombres = (String) var_Session.getAttribute("sessionNombres");
+        String user = (String) var_Session.getAttribute("sessionUsuario");
+        String tipo = (String) var_Session.getAttribute("sessionTipo");
+        String correo = (String) var_Session.getAttribute("sessionEmail");
+ 
+        if(user == null){
+            out.print("<center><h2><font color='blue'>Debe de haber iniciado Sesion para poder ingresar a esta pagina.</font><br><hr><font color='blue'>Intentelo de Nuevo</font><hr><h2></center><br>");
+            out.print("<center><h2><font color='blue'> Por Favor Epere...</font><hr><h2></center>");
+            //out.print("<meta http-equiv='refresh' content='4; url=http:sesion'/ >");
+            //out.print("<meta http-equiv='refresh' content='4; url=http:./'/ >");
+            response.sendRedirect("./");
+        }else if(user!=null){
+%>
 <!-- Para importar los datos de la clase Categoria -->
 <jsp:useBean id="categoria" scope="session" class="Model.Categoria" />
 
@@ -46,14 +62,15 @@
                                         <form class="form-horizontal" id="frmCategoria" name="frmCategoria" action="<%= request.getContextPath() %>/categorias" method="post">
                                             <input type="hidden" name="id_categoria" value="<%= id %>" >
                                             <div class="form-group">
-                                                <label class="display-6 mb-1" >Nombre</label>
+                                                <label class="display-6 mb-1 col-3" >Nombre</label>
                                                 <input class="form-control py-4"  type="text"  name="txtNomCategoria" value="<%= nombre_cat %>" required />
                                             </div>
                                             
                                             <div class="form-group">
-                                                <label class="display-6 mb-1" >Estado</label>
+                                                <label class="display-6 mb-1 col-3" >Estado</label>
                                                 <input class="form-control py-4"  type="text"  name="txtEstadoCategoria" value="<%= estado_cat %>" required/>
                                             </div>
+                                            
                                             <%
                         if(request.getParameter("senal")!=null){
                     %>
@@ -83,4 +100,10 @@
          <%@include file="../WEB-INF/Vistas-Parciales/pie.jspf" %>
     </body>
 </html>
-<!-- Autor: Prof. Manuel de Jesús Gámez López -->
+<%
+            }
+               //Aca puede ir un mensaje para informar que no se ha iniciado sesión.
+            }catch(Exception e){
+
+            }
+   %>

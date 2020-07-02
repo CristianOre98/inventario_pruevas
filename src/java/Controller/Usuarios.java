@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.codec.digest.DigestUtils;
 
 
 public class Usuarios extends HttpServlet {
@@ -132,8 +133,9 @@ public class Usuarios extends HttpServlet {
             String apellido = request.getParameter("txtApellidoUsuario");
             String correo = request.getParameter("txtCorreoUsuario");
             String usuari = request.getParameter("txtUsuario");
-           
+           //incriptando la clave md5
             String clave = request.getParameter("txtClaveUsuario");
+            String claveMD5=DigestUtils.md5Hex(clave); 
             int tipo = Integer.parseInt(request.getParameter("txtTipoUsuario").trim());
             int estado = Integer.parseInt(request.getParameter("txtEstadoUsuario").trim());
             String preguntas = request.getParameter("txtPreguntaUsuario");
@@ -144,7 +146,7 @@ public class Usuarios extends HttpServlet {
                 usuario.setApellido(apellido);
                 usuario.setCorreo(correo);
                 usuario.setUsuario(usuari);
-                usuario.setClave(clave);
+                usuario.setClave(claveMD5);
                 usuario.setTipo(tipo);
                 usuario.setEstado(estado);
                 usuario.setPregunta(preguntas);

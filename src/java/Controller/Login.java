@@ -25,7 +25,7 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
         dispatcher.forward(request, response);
         //response.sendRedirect("/index.jsp");
     }
@@ -73,7 +73,7 @@ public class Login extends HttpServlet {
             var_Session.setAttribute("lista", users); //lista es el nombre de la variable de sesión.
            
             //request.getRequestDispatcher("mostrarusuario.jsp").forward(request, response);
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/menuprincipal.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Home.jsp");
             dispatcher.forward(request, response);
             //response.sendRedirect("principal.jsp");
         }else{
